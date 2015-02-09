@@ -1,0 +1,125 @@
+<html>
+
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/ripples.min.css" rel="stylesheet">
+  <link href="css/material-wfont.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <title>WiAuth</title>
+</head>
+
+<body>
+  <div id="header"></div>
+  <div class="content">
+    <div id="reg-success" class="alert alert-dismissable alert-success shadow-z-1">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4>注册成功</h4>
+      <p>感谢您的注册，您现在可以登录安卓客户端享受我们的服务了~</p>
+      <a href="javascript:window.location.href = '/release.html';" class="btn btn-success">转到下载</a>
+    </div>
+    <div id="reg-error" class="alert alert-dismissable alert-danger shadow-z-1">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4>注册失败</h4>
+      <p>这里是可能的错误信息：</p>
+      <p id="error"></p>
+      <a href="javascript:window.location.href = '/reg.html';" class="btn btn-danger">重新填写</a>
+    </div>
+    <div id="form" class="well">
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>注册</legend>
+          <div class="form-group">
+            <label for="account" class="col-lg-2 control-label">用户名</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="account" id="account" placeholder="Account">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-lg-2 control-label">密码</label>
+            <div class="col-lg-10">
+              <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+              <input type="password" class="form-control" id="password-check" placeholder="Password Again">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="idnum" class="col-lg-2 control-label">身份证号</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="idnum" id="idnum" placeholder="ID">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mobile" class="col-lg-2 control-label">手机号</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">性别</label>
+            <div class="col-lg-10">
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="sex" id="sexMale" value="1" checked=""> 男
+                </label>
+              </div>
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="sex" id="sexFemale" value="2"> 女
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-lg-2 control-label">协议</label>
+            <div class="col-lg-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" checked>我同意《WiAuth终端用户协议》
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <button class="btn btn-default">Cancel</button>
+              <a class="btn btn-warning" id="submit" href="javascipt:void();">Submit</a>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <div id="footer"></div>
+
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="js/ripples.min.js"></script>
+  <script src="js/material.min.js"></script>
+  <script src="js/init.js"></script>
+  <script>
+    $('#reg-success').hide();
+    $('#reg-error').hide();
+    $('#submit').click(function() {
+      var url = 'http://wiauth.hackerchai.com/api/user/insert/';
+      url += 'account=' + $('#account').val();
+      url += '&password=' + $('#password').val();
+      url += '&idnum=' + $('#idnum').val();
+      url += '&mobile=' + $('#mobile').val();
+      url += '&sex=' + $('input[type=radio]:checked').val();
+      console.log(url);
+      $.get(url, {}, function(data) {
+        console.log(data);
+        console.log(data.err_code === 0);
+        if (data.err_code === "0") {
+          $('#form').fadeOut();
+          $('#reg-success').fadeIn();
+        } else {
+          $('#form').fadeOut();
+          $('#error').html('<p>' + data.err_msg + '</p>');
+          $('#reg-error').fadeIn();
+        }
+      }, 'json');
+    });
+  </script>
+</body>
+
+</html>
