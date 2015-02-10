@@ -42,12 +42,6 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="idnum" class="col-lg-2 control-label">身份证号</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" name="idnum" id="idnum" placeholder="ID">
-            </div>
-          </div>
-          <div class="form-group">
             <label for="mobile" class="col-lg-2 control-label">手机号</label>
             <div class="col-lg-10">
               <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile">
@@ -102,7 +96,6 @@
       var url = 'http://wiauth.hackerchai.com/api/user/insert/';
       url += 'account=' + $('#account').val();
       url += '&password=' + $('#password').val();
-      url += '&idnum=' + $('#idnum').val();
       url += '&mobile=' + $('#mobile').val();
       url += '&sex=' + $('input[type=radio]:checked').val();
       console.log(url);

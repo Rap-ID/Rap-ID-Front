@@ -1,23 +1,20 @@
 .header {
-  height: 600px;
+  height: 300px;
 }
 .header-content {
   padding-left: 10%;
   padding-right: 10%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 .header-title {
-  height: 460px;
-  padding-top: 140px;
+  height: 250px;
+  padding-top: 10px;
   color: #ffffff;
   text-align: center;
 }
 .header-title-text {
   font-size: 80px;
-}
-.header-title-btn {
-  padding-top: 20px;
 }
 .content {
   padding-top: 60px;
